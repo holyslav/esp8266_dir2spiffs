@@ -1,10 +1,11 @@
 # SPIFFS example
 
-Unlike the example from the ESP-RTOS-SDK, added spiffs auto-generation of a binary file based on the data folder, modified the RTOS-SDK so that the binary file is automatically added to the list of loader files
+Modified spiffs example from ESP-RTOS-SDK. Added auto-generation of a binary image of a partition based on a folder with data, while the size for the image is automatically taken from partitions.csv. To work, you need either my fork of the SDK, https://github.com/holyslav/ESP8266_RTOS_SDK, or if the pull request is accepted, then you can take the official version.
 
 ## How to use example
 ```
-./rebuild.sh && ./flash.sh && ./monitor.sh
+Write your code in the main folder, add your spiffs files to the data folder. Call `script/flash.sh` and your project, along with the files from the data folder, will be loaded into esp memory.
+You can also upload the program and storage separately via scripts/flash-app.sh and scripts/flash-storage.sh, respectively
 ```
 
 ### Hardware required
@@ -12,15 +13,10 @@ Unlike the example from the ESP-RTOS-SDK, added spiffs auto-generation of a bina
 ESP8266
 ```
 
-### Configure the project
-```
-cmake -B build && cmake --build build --target menuconfig
-```
-
 ### Build and flash
 Build the project and flash it to the board, then run monitor tool to view serial output:
 ```
-./genspiffs.sh && ./build.sh && ./flash.sh && ./monitor.sh
+scripts/flash.sh && scripts/monitor.sh
 ```
 
 (To exit the serial monitor, type ``Ctrl-]``.)
@@ -40,11 +36,11 @@ I (109) boot:  2 factory          factory app      00 00 00010000 00100000
 I (121) boot:  3 storage          Unknown data     01 82 00110000 00200000
 I (132) boot: End of partition table
 I (206) boot: Loaded app from partition at offset 0x10000
-I (233) example: Initializing SPIFFS. max_files: 17
+I (233) dir2spiffs: Initializing SPIFFS. max_files: 17
 I (328) example: Partition size: total: 1920401, used: 502
-I (329) example: Reading file
-I (332) example: Read from file: 'Hello world!'
-I (335) example: SPIFFS unmounted
+I (329) dir2spiffs: Reading file
+I (332) dir2spiffs: Read from file: 'Hello world!'
+I (335) dir2spiffs: SPIFFS unmounted
 ```
 
-To erase the contents of SPIFFS partition, run `cmake -B build && cmake --build build --target erase_flash`, if using CMake build system). Then upload the example again as described above.
+To erase the contents of all partition, run `scripts/erase.sh`.

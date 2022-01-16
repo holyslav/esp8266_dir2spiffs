@@ -14,7 +14,7 @@
 #include "esp_log.h"
 #include "esp_spiffs.h"
 
-static const char *TAG = "example";
+static const char *TAG = "dir2spiffs";
 
 void app_main(void)
 {
