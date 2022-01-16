@@ -4,7 +4,8 @@ Modified spiffs example from ESP-RTOS-SDK. Added auto-generation of a binary ima
 
 ## How to use example
 ```
-Write your code in the main folder, add your spiffs files to the data folder. Call `script/flash.sh` and your project, along with the files from the data folder, will be loaded into esp memory.
+Write your code in the main folder, add your spiffs files to the data folder.
+Call `script/flash.sh` and your project, along with the files from the data folder, will be loaded into esp memory.
 You can also upload the program and storage separately via scripts/flash-app.sh and scripts/flash-storage.sh, respectively
 ```
 
